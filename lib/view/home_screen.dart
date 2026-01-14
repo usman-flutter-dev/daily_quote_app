@@ -1,9 +1,8 @@
-import 'package:daily_quote_app/viewmodel/quote_controller.dart';
-import 'package:daily_quote_app/widgets/bottom_navbar.dart';
+import 'package:daily_quote_app/utils/colors.dart';
 import 'package:daily_quote_app/widgets/header.dart';
 import 'package:daily_quote_app/widgets/search.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,10 +10,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(QuoteController());
+    // final qController = Get.find<QuoteController>();
+    // final nbController = Get.find<NavBarController>();
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      bottomNavigationBar: BottomNavBar(),
       body: SafeArea(
         bottom: true,
         child: Padding(
@@ -33,16 +32,86 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
+                    padding: const EdgeInsets.only(bottom: 25),
                     child: Column(
                       crossAxisAlignment: .start,
                       children: [
+                        Text(
+                          'Daily Challenge',
+                          style: GoogleFonts.roboto(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.textMain,
+                          ),
+                        ),
+
+                        Container(
+                          margin: EdgeInsets.only(top: 5, bottom: 10),
+                          height: 137,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+
+                        Row(
+                          mainAxisAlignment: .spaceBetween,
+                          children: [
+                            Text(
+                              'Trending Stories',
+                              style: GoogleFonts.roboto(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.textMain,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                HapticFeedback.mediumImpact();
+                                // Handle Here
+                              },
+                              child: Text(
+                                'view all',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(
+                          height: 140,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 4,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.only(
+                                  top: 5,
+                                  right: 12,
+                                  bottom: 10,
+                                ),
+                                // height: 137,
+                                width: 121,
+                                decoration: BoxDecoration(
+                                  color: Colors.amber,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+
                         Text(
                           'Daily Affirmation',
                           style: GoogleFonts.roboto(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Colors.black,
+                            color: AppColors.textMain,
                           ),
                         ),
 
@@ -50,44 +119,6 @@ class HomeScreen extends StatelessWidget {
                           margin: EdgeInsets.only(top: 5, bottom: 10),
                           height: 137,
                           width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-
-                        //
-                        Text(
-                          'Daily challenge',
-                          style: GoogleFonts.roboto(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-
-                        Container(
-                          margin: EdgeInsets.only(top: 5, bottom: 10),
-                          height: 137,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        Text(
-                          'Trending stories',
-                          style: GoogleFonts.roboto(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-
-                        Container(
-                          margin: EdgeInsets.only(top: 5),
-                          height: 137,
-                          width: 121,
                           decoration: BoxDecoration(
                             color: Colors.amber,
                             borderRadius: BorderRadius.circular(10),
@@ -101,14 +132,6 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFFF99855),
-        shape: CircleBorder(),
-        onPressed: () => controller.changeTab(2), // Center index
-        elevation: 0,
-        child: Icon(Icons.add, size: 40, color: Colors.white),
       ),
     );
   }
