@@ -1,0 +1,59 @@
+import 'dart:convert';
+
+import 'package:daily_quote_app/model/quotes_model.dart';
+import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+
+class QuoteController extends GetxController {
+  RxInt selectedIndex = 0.obs;
+
+  void changeTab(int index) {
+    selectedIndex.value = index;
+  }
+
+  // API URL
+  final String baseURL = 'https://jsonguide.technologychannel.org';
+  final String quotesEndPoint = '/quotes.json';
+  RxBool isLoading = false.obs;
+  RxList<QuotesModel> quoteData = <QuotesModel>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    try {
+      isLoading(true);
+      final response = await http.get(Uri.parse(baseURL + quotesEndPoint));
+
+      if (response.statusCode == 200) {
+        // Data ko Decode Kiya hai
+        List<dynamic> decodedData = jsonDecode(response.body);
+
+        // Data ko Dart Objects mn Convert kia hai taa keh use kr skyn
+        quoteData.value = decodedData
+            .map((e) => QuotesModel.fromJson(e))
+            .toList();
+      } else {
+        Get.snackbar(
+          "Error",
+          "Server se data nahi mila: ${response.statusCode}",
+          margin: EdgeInsets.all(15),
+          borderRadius: 15,
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        "Error",
+        "Kuch galat hua: $e",
+        margin: EdgeInsets.all(15),
+        borderRadius: 15,
+      );
+    } finally {
+      isLoading(false);
+    }
+  }
+}
