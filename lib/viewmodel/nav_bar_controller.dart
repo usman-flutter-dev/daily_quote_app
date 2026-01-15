@@ -17,7 +17,7 @@ class NavBarController extends GetxController {
   final List<Widget> pages = [
     const HomeScreen(),
     const FavoriteScreen(),
-    const Text('Hi'),
+    const SizedBox(),
     const StatisticsScreen(),
     const SettingScreen(),
   ];

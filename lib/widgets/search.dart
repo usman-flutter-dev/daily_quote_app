@@ -14,12 +14,12 @@ class Search extends StatelessWidget {
           prefixIcon: Icon(Icons.search, color: AppColors.primaryOrange),
           hintText: "Search",
           hintStyle: GoogleFonts.lato(
-            fontSize: 14,
+            fontSize: 15,
             fontWeight: FontWeight.normal,
-            color: AppColors.primaryOrange.withValues(alpha: 0.5),
+            color: AppColors.primaryOrange.withValues(alpha: 0.7),
           ),
           filled: true,
-          fillColor: AppColors.surfaceGhost.withValues(alpha: 0.2),
+          fillColor: Colors.grey[200],
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,

@@ -2,11 +2,35 @@ import 'dart:convert';
 
 import 'package:daily_quote_app/model/quotes_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class QuoteController extends GetxController {
+  // Chips
+  // Use .obs to make it reactive!
+  var selectedChipIndex = 0.obs;
+  // A method to update the index when a user clicks
+  void updateSelectedChip(int index) {
+    selectedChipIndex.value = index;
+  }
+
+  List<String> chips = [
+    'All',
+    'Motivation',
+    'Failure',
+    'Work',
+    'Success',
+    'Hate',
+    'Love',
+    'Sad',
+    'Happy',
+    'Travel',
+    'Men',
+    'Women',
+  ];
+  // Chips Ends
+
+  // API Starts
   // API URL
   final String baseURL = 'https://jsonguide.technologychannel.org';
   final String quotesEndPoint = '/quotes.json';

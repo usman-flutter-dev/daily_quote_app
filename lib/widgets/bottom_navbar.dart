@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BottomNavBar extends StatelessWidget {
-  final controller = Get.find<NavBarController>();
-
-  BottomNavBar({super.key});
+  const BottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<NavBarController>();
     return Obx(() {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: controller.pages[controller.currentTabIndex.value],
         bottomNavigationBar: Container(
           height: 60,
