@@ -17,10 +17,7 @@ class CommonScreen extends StatelessWidget {
           SliverAppBar(
             iconTheme: IconThemeData(color: Colors.white),
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                'https://i.pinimg.com/736x/9f/f8/d4/9ff8d4e19a75d14fb1711b81260ae6f9.jpg',
-                fit: BoxFit.cover,
-              ),
+              background: Image.asset(AppImages.womanImage, fit: BoxFit.cover),
             ),
             pinned: true,
             backgroundColor: Colors.black87,
@@ -40,6 +37,7 @@ class CommonScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(20),
+
                   child: Image.asset(
                     AppImages.backgrounds[index],
                     fit: BoxFit.cover,

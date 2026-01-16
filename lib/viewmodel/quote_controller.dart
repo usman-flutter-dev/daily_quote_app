@@ -6,6 +6,21 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class QuoteController extends GetxController {
+  // Fav Quote
+  RxSet<int> favIndexes = <int>{}.obs;
+
+  void toggleFav(int index) {
+    if (favIndexes.contains(index)) {
+      favIndexes.remove(index);
+    } else {
+      favIndexes.add(index);
+    }
+  }
+
+  bool isFav(int index) {
+    return favIndexes.contains(index);
+  }
+
   // Chips
   // Use .obs to make it reactive!
   var selectedChipIndex = 0.obs;

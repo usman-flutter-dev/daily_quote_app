@@ -22,7 +22,7 @@ class Header extends StatelessWidget {
             Text("Good Morning 👋", style: GoogleFonts.aboreto(fontSize: 14)),
             SizedBox(height: 4),
             Text(
-              "Sarah Josiah",
+              "Uswa A. Sahi",
               style: GoogleFonts.poppins(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

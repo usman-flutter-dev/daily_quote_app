@@ -13,6 +13,7 @@
 // }
 
 class AppImages {
+  static final String womanImage = "assets/images/womanimage5.jpg";
   static const List<String> backgrounds = [
     "assets/images/womanimage.jpg",
     "assets/images/womanimage1.jpg",

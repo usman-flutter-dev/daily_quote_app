@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:daily_quote_app/utils/app_images.dart';
 import 'package:daily_quote_app/utils/app_text.dart';
 import 'package:daily_quote_app/utils/colors.dart';
@@ -15,6 +17,7 @@ class TrendingStories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final quoteController = Get.find<QuoteController>();
+    final Random random = Random();
 
     return Column(
       children: [
@@ -94,8 +97,9 @@ class TrendingStories extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.asset(
-                              AppImages.backgrounds[index %
-                                  AppImages.backgrounds.length],
+                              AppImages.backgrounds[
+                              // index % AppImages.backgrounds.length
+                              random.nextInt(AppImages.backgrounds.length)],
                               fit: BoxFit.cover,
                               color: Colors.black.withValues(alpha: 0.3),
                               colorBlendMode: BlendMode.darken,
