@@ -35,7 +35,7 @@ class ImageExportService {
       );
       Get.snackbar('Success', 'Quote Shared!', margin: EdgeInsets.all(15));
     } catch (e) {
-      print("Error sharing image: $e");
+      Get.snackbar('Error', 'Error is: $e', margin: EdgeInsets.all(15));
     }
   }
 }

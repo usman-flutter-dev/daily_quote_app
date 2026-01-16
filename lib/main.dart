@@ -1,6 +1,6 @@
 import 'package:daily_quote_app/viewmodel/nav_bar_controller.dart';
 import 'package:daily_quote_app/viewmodel/quote_controller.dart';
-import 'package:daily_quote_app/widgets/bottom_navbar.dart';
+import 'package:daily_quote_app/widgets/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BottomNavBar(),
+      home: BottomNavBarPackage(),
     );
   }
 }
