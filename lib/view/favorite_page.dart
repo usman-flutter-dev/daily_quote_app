@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:daily_quote_app/utils/app_images.dart';
 import 'package:daily_quote_app/utils/colors.dart';
 import 'package:daily_quote_app/viewmodel/quote_controller.dart';
