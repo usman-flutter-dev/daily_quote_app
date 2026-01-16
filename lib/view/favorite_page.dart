@@ -15,8 +15,6 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final QuoteController controller = Get.put(QuoteController());
-    final Random random = Random();
-
     return Scaffold(
       body: Obx(() {
         if (controller.isLoading.value) {
