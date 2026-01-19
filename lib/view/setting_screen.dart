@@ -49,14 +49,14 @@ class SettingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Sarah Josiah',
+                          'Uswa A. Sahi',
                           style: GoogleFonts.poppins(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          'sarahjos@gmail.com',
+                          'uswa@gmail.com',
                           style: GoogleFonts.roboto(color: Colors.grey),
                         ),
                       ],

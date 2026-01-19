@@ -104,8 +104,8 @@ class QuoteController extends GetxController {
         Uri.parse(ApiKey.pexelSearchAPIURL),
         headers: {'Authorization': ApiKey.pexelAPIKey},
       );
-      print('STATUS: ${response.statusCode}');
-      print('BODY: ${response.body}');
+      // print('STATUS: ${response.statusCode}');
+      // print('BODY: ${response.body}');
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> decodedData = jsonDecode(response.body);

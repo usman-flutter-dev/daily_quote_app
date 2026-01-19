@@ -19,23 +19,6 @@ class DailyChallange extends StatelessWidget {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Obx(() {
-          if (quoteController.photosList.isEmpty) {
-            return const SizedBox(
-              height: 100,
-              child: Center(child: CircularProgressIndicator()),
-            );
-          }
-
-          return SizedBox(
-            height: 100,
-            child: Image.network(
-              quoteController.photosList.first.src?.medium ?? '',
-              fit: BoxFit.cover,
-            ),
-          );
-        }),
-
         Text(
           AppText.dailyChallenge,
           style: GoogleFonts.roboto(
@@ -60,11 +43,6 @@ class DailyChallange extends StatelessWidget {
                       color: AppColors.primaryOrange,
                       size: 40,
                     ),
-                    // const SizedBox(height: 20),
-                    // Text(
-                    //   "Fetching Quotes...",
-                    //   style: GoogleFonts.roboto(color: Colors.grey),
-                    // ),
                   ],
                 ),
               );
@@ -99,21 +77,14 @@ class DailyChallange extends StatelessWidget {
                         opacity: 0.6,
                         filterQuality: FilterQuality.low,
                       ),
-                      // image: DecorationImage(
-                      //   image: AssetImage(
-                      //     AppImages.backgrounds[index %
-                      //         AppImages.backgrounds.length],
-                      //   ),
-                      //   fit: BoxFit.cover,
-                      //   opacity: 0.6,
-                      //   filterQuality: FilterQuality.low,
-                      // ),
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(
                       children: [
                         Text(
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
                           quoteController.quoteData[index].text.toString(),
                           style: GoogleFonts.aboreto(
                             fontSize: 16,
@@ -125,6 +96,8 @@ class DailyChallange extends StatelessWidget {
                         Align(
                           alignment: Alignment.bottomRight,
                           child: Text(
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                             '_${quoteController.quoteData[index].from}',
                             style: GoogleFonts.akronim(
                               fontSize: 16,
@@ -133,8 +106,6 @@ class DailyChallange extends StatelessWidget {
                             ),
                           ),
                         ),
-
-                        // Text(data),
                       ],
                     ),
                   ),
