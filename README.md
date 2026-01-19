@@ -4,9 +4,9 @@
 
 Get a quick look at the main screens designed for the application.
 
-| Home Screen | Favorite Screen | Settings Screen |
+| Home Screen | Favourites Screen | Settings Screen |
 | :---: | :---: | :---: |
-| ![Home Screen](assets/screenshots/home.jpeg) | ![Favorite Screen](assets/screenshots/fovourites.jpeg) | ![Settings Screen](assets/screenshots/settings.jpeg) |
+| ![Home Screen](assets/screenshots/home.jpeg) | ![Favorite Screen](assets/screenshots/favourites.jpeg) | ![Settings Screen](assets/screenshots/settings.jpeg) |
 
 ---
 
