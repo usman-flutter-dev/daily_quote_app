@@ -9,8 +9,7 @@ class NeumorphicCard extends StatefulWidget {
 }
 
 class _NeumorphicCardState extends State<NeumorphicCard> {
-  bool isPressed = false; // Isse hum state track karenge
-
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     // Neumorphic colors

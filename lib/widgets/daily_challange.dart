@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class DailyChallange extends StatelessWidget {
   const DailyChallange({super.key});
@@ -18,6 +19,23 @@ class DailyChallange extends StatelessWidget {
     return Column(
       crossAxisAlignment: .start,
       children: [
+        Obx(() {
+          if (quoteController.photosList.isEmpty) {
+            return const SizedBox(
+              height: 100,
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+
+          return SizedBox(
+            height: 100,
+            child: Image.network(
+              quoteController.photosList.first.src?.medium ?? '',
+              fit: BoxFit.cover,
+            ),
+          );
+        }),
+
         Text(
           AppText.dailyChallenge,
           style: GoogleFonts.roboto(
@@ -31,6 +49,26 @@ class DailyChallange extends StatelessWidget {
         SizedBox(
           height: 150,
           child: Obx(() {
+            if (quoteController.photosList.isEmpty &&
+                quoteController.quoteData.isEmpty) {
+              Future.delayed(Duration(seconds: 3));
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LoadingAnimationWidget.halfTriangleDot(
+                      color: AppColors.primaryOrange,
+                      size: 40,
+                    ),
+                    // const SizedBox(height: 20),
+                    // Text(
+                    //   "Fetching Quotes...",
+                    //   style: GoogleFonts.roboto(color: Colors.grey),
+                    // ),
+                  ],
+                ),
+              );
+            }
             return ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: quoteController.quoteData.length > 10
@@ -52,14 +90,24 @@ class DailyChallange extends StatelessWidget {
                     width: 300,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(
-                          AppImages.backgrounds[index %
-                              AppImages.backgrounds.length],
+                        image: NetworkImage(
+                          quoteController.photosList[index].src?.landscape ??
+                              AppImages.backgrounds[index %
+                                  AppImages.backgrounds.length],
                         ),
                         fit: BoxFit.cover,
                         opacity: 0.6,
                         filterQuality: FilterQuality.low,
                       ),
+                      // image: DecorationImage(
+                      //   image: AssetImage(
+                      //     AppImages.backgrounds[index %
+                      //         AppImages.backgrounds.length],
+                      //   ),
+                      //   fit: BoxFit.cover,
+                      //   opacity: 0.6,
+                      //   filterQuality: FilterQuality.low,
+                      // ),
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -85,6 +133,8 @@ class DailyChallange extends StatelessWidget {
                             ),
                           ),
                         ),
+
+                        // Text(data),
                       ],
                     ),
                   ),

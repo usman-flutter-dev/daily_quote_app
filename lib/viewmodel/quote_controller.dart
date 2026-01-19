@@ -1,6 +1,7 @@
 import 'dart:convert';
-
+import 'package:daily_quote_app/model/pexel_model.dart';
 import 'package:daily_quote_app/model/quotes_model.dart';
+import 'package:daily_quote_app/utils/api_key.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -56,6 +57,7 @@ class QuoteController extends GetxController {
   void onInit() {
     super.onInit();
     fetchData();
+    fetchPexelData();
   }
 
   Future<void> fetchData() async {
@@ -71,6 +73,46 @@ class QuoteController extends GetxController {
         quoteData.value = decodedData
             .map((e) => QuotesModel.fromJson(e))
             .toList();
+      } else {
+        Get.snackbar(
+          "Error",
+          "Server se data nahi mila: ${response.statusCode}",
+          margin: EdgeInsets.all(15),
+          borderRadius: 15,
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        "Error",
+        "Kuch galat hua: $e",
+        margin: EdgeInsets.all(15),
+        borderRadius: 15,
+      );
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  // Pexel API
+  Rx<Pexel?> pexelData = Rx<Pexel?>(null);
+  RxList<Photos> photosList = <Photos>[].obs;
+
+  Future<void> fetchPexelData() async {
+    try {
+      isLoading(true);
+      final response = await http.get(
+        Uri.parse(ApiKey.pexelSearchAPIURL),
+        headers: {'Authorization': ApiKey.pexelAPIKey},
+      );
+      print('STATUS: ${response.statusCode}');
+      print('BODY: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> decodedData = jsonDecode(response.body);
+        final pexel = Pexel.fromJson(decodedData);
+        pexelData.value = pexel;
+        photosList.addAll(pexel.photos ?? []);
+        // pexelData.value = decodedData.map((v) => Pexel.fromJson(v)).toList();
       } else {
         Get.snackbar(
           "Error",

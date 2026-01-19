@@ -6,6 +6,7 @@ import 'package:daily_quote_app/viewmodel/quote_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class DailyAffirmation extends StatelessWidget {
   const DailyAffirmation({super.key});
@@ -30,8 +31,25 @@ class DailyAffirmation extends StatelessWidget {
         SizedBox(
           height: 140,
           child: Obx(() {
-            if (quoteController.quoteData.isEmpty) {
-              return const Center(child: CircularProgressIndicator());
+            if (quoteController.photosList.isEmpty &&
+                quoteController.quoteData.isEmpty) {
+              Future.delayed(Duration(seconds: 3));
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    LoadingAnimationWidget.halfTriangleDot(
+                      color: AppColors.primaryOrange,
+                      size: 40,
+                    ),
+                    // const SizedBox(height: 20),
+                    // Text(
+                    //   "Fetching Quotes...",
+                    //   style: GoogleFonts.roboto(color: Colors.grey),
+                    // ),
+                  ],
+                ),
+              );
             }
             return ListView.builder(
               itemCount: quoteController.quoteData.length > 15
